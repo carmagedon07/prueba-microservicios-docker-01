@@ -1,0 +1,58 @@
+{
+  "info": {
+    "name": "BackEndPruebaGit - Producto e Inventario",
+    "_postman_id": "backendpruebagit-collection",
+    "description": "Colección de endpoints para los microservicios Producto e Inventario.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET Producto por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/productos/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["api", "productos", "1"]
+        }
+      }
+    },
+    {
+      "name": "GET Inventario por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/inventario/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["inventario", "1"]
+        }
+      }
+    },
+    {
+      "name": "POST Compra",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"productoId\": 1,\n  \"cantidad\": 3\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8082/compra",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["compra"]
+        }
+      }
+    }
+  ]
+}

@@ -8,6 +8,9 @@ import com.InventarioAPI.Inventario.interfaces.dto.ProductoDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class InventarioServiceImpl implements  IInventarioService {
 
@@ -25,13 +28,15 @@ public class InventarioServiceImpl implements  IInventarioService {
     @Override
     public Inventario actualizarCantidad(Long productoId, Integer nuevaCantidad) {
 
-        InventarioEntity inv = repo.findById(productoId).orElse(new InventarioEntity(productoId, 0));
-        inv.setCantidad(nuevaCantidad);
-        inv = repo.save(inv);
-
-        Inventario showIn = new Inventario(inv.getProductoId(), inv.getCantidad());
+        Inventario showIn = new Inventario();
+        List<Object[]> invByID= repo.encontrarCantidadPorProductoId();
+        if(!invByID.isEmpty()){
+            repo.actualizarCantidad(productoId,nuevaCantidad);
+            showIn = new Inventario(productoId, nuevaCantidad);
+        }
 
         return showIn;
+
     }
 
     @Override
@@ -59,8 +64,24 @@ public class InventarioServiceImpl implements  IInventarioService {
         }
         InventarioEntity inv = new InventarioEntity();
         if (resp.getStatusCode().is2xxSuccessful() && resp.getBody() != null) {
-            ProductoDTO body = (ProductoDTO)resp.getBody();
-            inv = repo.findById(productoId).orElse(new InventarioEntity(body.getId(), cantidad));
+            Object body = resp.getBody();
+            if(body instanceof Map){
+                InventarioEntity inv2 = repo.findById(productoId).orElse(new InventarioEntity(0L, 0));
+
+                Map<String, Object> data = (Map<String, Object>) body;
+                inv.setProductoId(Long.valueOf(data.get("id").toString()));
+                inv.setCantidad(inv2.getCantidad());
+
+
+
+
+            }else{
+                throw new RuntimeException("No existe el producto");
+            }
+
+
+        }else{
+            throw new RuntimeException("Inventario insuficiente");
         }
 
 

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -19,6 +20,8 @@ import javax.persistence.Table;
 public class InventarioEntity {
 
     @Id
+    @Column(name = "producto_id")
     private Long productoId;
+    @Column(name = "cantidad")
     private Integer cantidad;
 }

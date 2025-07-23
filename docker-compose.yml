@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  producto:
+    build:
+      context: ./Producto
+    container_name: producto-container
+    ports:
+      - "8081:8081"
+    networks:
+      - microservicios-net
+
+  inventario:
+    build:
+      context: ./Inventario
+    container_name: inventario-container
+    ports:
+      - "8082:8082"
+    networks:
+      - microservicios-net
+    depends_on:
+      - producto
+
+networks:
+  microservicios-net:
+    driver: bridge

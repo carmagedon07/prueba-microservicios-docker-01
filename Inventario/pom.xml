@@ -92,6 +92,11 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.15</version>
+		</dependency>
 
 		<!-- Dependencia para pruebas unitarias -->
 		<dependency>
@@ -111,6 +116,7 @@
 			<artifactId>commons-csv</artifactId>
 			<version>1.4</version>
 		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>

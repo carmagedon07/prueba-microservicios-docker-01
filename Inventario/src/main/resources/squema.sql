@@ -1,4 +1,4 @@
 CREATE TABLE inventario (
-                            productoId BIGINT PRIMARY KEY,
+                            producto_id BIGINT PRIMARY KEY,
                             cantidad INT
 );
